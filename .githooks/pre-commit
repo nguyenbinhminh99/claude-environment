@@ -1,0 +1,4 @@
+#!/bin/sh
+# Enable once per clone:  git config core.hooksPath .githooks
+# Blocks commits that contain possible secrets or invalid config.
+exec powershell.exe -NoProfile -ExecutionPolicy Bypass -File "$(git rev-parse --show-toplevel)/scripts/validate.ps1" -Scope Repo

@@ -1,0 +1,33 @@
+# Never commit credentials, history or local state
+.credentials.json
+.claude.json
+.env
+.env.*
+*.pem
+*.key
+*.pfx
+id_rsa*
+id_ed25519*
+*.token
+secrets/
+
+# Machine-local files (copy from machine/*.example.json instead)
+machine/*.local.json
+mcp.json
+.mcp.json
+settings.local.json
+
+# Claude runtime data
+projects/
+sessions/
+session-env/
+file-history/
+shell-snapshots/
+cache/
+plans/
+backups/
+claude-environment.state.json
+
+# Script output
+logs/
+*.log

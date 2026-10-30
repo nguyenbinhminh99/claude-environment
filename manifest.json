@@ -1,0 +1,38 @@
+{
+  "name": "claude-environment",
+  "version": "1.0.0",
+  "schema": 1,
+  "components": {
+    "instructions": { "type": "files", "map": [ { "src": "global/CLAUDE.md", "dst": "CLAUDE.md" } ] },
+    "agents":       { "type": "dir", "src": "global/agents",    "dst": "agents" },
+    "skills":       { "type": "dir", "src": "global/skills",    "dst": "skills" },
+    "templates":    { "type": "dir", "src": "global/templates", "dst": "templates" },
+    "hooks":        { "type": "dir", "src": "global/hooks",     "dst": "hooks", "optional": true },
+    "routing":      { "type": "settings" },
+    "permissions":  { "type": "settings" },
+    "settings":     { "type": "settings" }
+  },
+  "settings": {
+    "src": "global/settings.json",
+    "dst": "settings.json",
+    "routingKeys": [ "model" ],
+    "permissionKeys": [ "permissions" ],
+    "agentRoutingFields": [ "model", "effort" ]
+  },
+  "validation": {
+    "modelAliases": [ "opusplan", "opus", "sonnet", "haiku", "inherit", "default" ],
+    "modelIdPattern": "^claude-[a-z0-9.\\-\\[\\]]+$",
+    "effortLevels": [ "low", "medium", "high", "xhigh", "max" ],
+    "requiredDeny": [ "Read(//**/.env)", "Read(~/.ssh/**)", "Read(~/.claude/.credentials.json)" ],
+    "requiredAsk": [ "Bash(git push *)", "PowerShell(git push *)" ],
+    "forbiddenAllow": [ "Bash(*)", "PowerShell(*)", "Bash", "PowerShell" ],
+    "agentRequiredFields": [ "name", "description" ]
+  },
+  "neverManaged": [
+    ".credentials.json",
+    "../.claude.json",
+    "skills/synced",
+    "projects", "sessions", "session-env", "file-history", "shell-snapshots",
+    "cache", "plugins", "ide", "plans", "backups", "team-setup"
+  ]
+}
